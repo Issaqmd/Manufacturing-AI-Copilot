@@ -1,6 +1,6 @@
 """
 app/main.py
-FastAPI backend application for the BiztelAI Manufacturing AI Copilot.
+FastAPI backend application for the Manufacturing AI Copilot.
 Handles question queries, RAG generation, and serves the static frontend UI.
 """
 from fastapi import FastAPI, HTTPException
@@ -12,12 +12,12 @@ from app.config import STATIC_DIR
 from app.rag_engine import get_rag_engine
 
 app = FastAPI(
-    title="BiztelAI Manufacturing AI Copilot",
-    description="RAG-powered AI assistant for factory supervisors and operators at Kaveri Precision Components.",
+    title="Manufacturing AI Copilot",
+    description="RAG-powered industrial AI assistant for factory supervisors and operators at Kaveri Precision Components.",
     version="1.0.0"
 )
 
-# Enable CORS for local testing and mobile access
+# Enable CORS for local testing and public web access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -27,7 +27,6 @@ app.add_middleware(
 )
 
 
-# Pydantic Request Model
 class QuestionRequest(BaseModel):
     question: str = Field(..., min_length=2, description="The supervisor's question about plant SOPs or manuals.")
 
@@ -35,7 +34,7 @@ class QuestionRequest(BaseModel):
 @app.get("/api/health")
 def health_check():
     """Health check endpoint to verify server status."""
-    return {"status": "healthy", "service": "BiztelAI Copilot API"}
+    return {"status": "healthy", "service": "Manufacturing AI Copilot API"}
 
 
 @app.post("/api/ask")

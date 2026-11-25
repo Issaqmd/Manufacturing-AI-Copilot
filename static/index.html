@@ -3,82 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiztelAI Manufacturing AI Copilot</title>
+    <title>Manufacturing AI Copilot | Industrial SOP & Maintenance Intelligence</title>
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-dark: #172554;
-            --accent: #2563eb;
-            --bg-color: #f8fafc;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --brand-blue: #1d4ed8;
+            --brand-blue-hover: #1e40af;
+            --amber-accent: #f59e0b;
+            --emerald-dot: #10b981;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --danger-bg: #fef2f2;
-            --danger-text: #991b1b;
-            --success-bg: #f0fdf4;
-            --success-text: #166534;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #e9eef5;
+            color: var(--slate-800);
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        .app-shell {
+            width: 100%;
+            max-width: 920px;
+            background-color: var(--slate-50);
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            max-width: 800px;
-            margin: 0 auto;
+            height: 100%;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
         }
 
+        /* Top Navigation Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 16px 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header-top {
+            background-color: var(--slate-900);
+            color: #ffffff;
+            padding: 14px 20px;
+            border-bottom: 3px solid var(--amber-accent);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
+        }
+
+        .brand-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .brand-title-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            background: var(--amber-accent);
+            color: var(--slate-900);
+            font-weight: 800;
+            font-size: 0.78rem;
+            padding: 3px 7px;
+            border-radius: 4px;
+            letter-spacing: 0.6px;
         }
 
         h1 {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
-        }
-
-        .plant-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.2px;
         }
 
         .subtitle {
-            font-size: 0.8rem;
-            opacity: 0.85;
-            margin-top: 4px;
+            font-size: 0.78rem;
+            color: #cbd5e1;
         }
 
-        /* Quick Chips Bar (Oily hands / glove friendly) */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            color: #f8fafc;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--emerald-dot);
+        }
+
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        /* Quick Query Bar */
+        .quick-bar-wrapper {
+            background: #ffffff;
+            border-bottom: 1px solid var(--slate-200);
+            padding: 10px 18px;
+        }
+
+        .quick-bar-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--slate-500);
+            margin-bottom: 7px;
+        }
+
         .quick-chips-container {
-            background: #e2e8f0;
-            padding: 10px 16px;
             display: flex;
             gap: 8px;
             overflow-x: auto;
             white-space: nowrap;
-            border-bottom: 1px solid var(--border);
+            padding-bottom: 2px;
         }
 
         .quick-chips-container::-webkit-scrollbar {
@@ -91,28 +172,28 @@
         }
 
         .chip {
-            background: white;
+            background: var(--slate-100);
             border: 1px solid #cbd5e1;
             padding: 6px 12px;
-            border-radius: 16px;
+            border-radius: 6px;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-main);
+            transition: all 0.15s ease;
+            color: var(--slate-800);
             font-weight: 500;
         }
 
         .chip:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
+            background: var(--slate-900);
+            color: #ffffff;
+            border-color: var(--slate-900);
         }
 
-        /* Chat Container */
+        /* Chat Stream */
         #chat-container {
             flex: 1;
             overflow-y: auto;
-            padding: 16px;
+            padding: 18px 20px;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -121,13 +202,7 @@
         .message {
             display: flex;
             flex-direction: column;
-            max-width: 90%;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+            max-width: 88%;
         }
 
         .message.user {
@@ -137,86 +212,123 @@
         .message.assistant {
             align-self: flex-start;
             width: 100%;
+            max-width: 94%;
+        }
+
+        .message-meta {
+            font-size: 0.72rem;
+            color: var(--slate-500);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .message.user .message-meta {
+            text-align: right;
         }
 
         .message-bubble {
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 0.93rem;
+            line-height: 1.55;
             word-wrap: break-word;
         }
 
         .message.user .message-bubble {
-            background-color: var(--accent);
-            color: white;
+            background-color: var(--brand-blue);
+            color: #ffffff;
             border-bottom-right-radius: 2px;
         }
 
         .message.assistant .message-bubble {
             background-color: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border);
+            color: var(--slate-800);
+            border: 1px solid var(--slate-200);
             border-bottom-left-radius: 2px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         }
 
-        /* Formatted Answer styling */
-        .message-bubble p {
+        /* Structured Answer Typography */
+        .answer-content p {
             margin-bottom: 8px;
         }
-        .message-bubble p:last-child {
+
+        .answer-content p:last-child {
             margin-bottom: 0;
         }
-        .message-bubble ul, .message-bubble ol {
-            margin-left: 20px;
-            margin-bottom: 8px;
+
+        .answer-content h4 {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-top: 12px;
+            margin-bottom: 6px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--slate-200);
         }
 
-        /* Sources Card */
+        .answer-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .answer-content ul {
+            margin: 6px 0 10px 20px;
+        }
+
+        .answer-content li {
+            margin-bottom: 4px;
+        }
+
+        .answer-content hr {
+            border: none;
+            border-top: 1px solid var(--slate-200);
+            margin: 10px 0;
+        }
+
+        /* Citations & Verbatim Inspection */
         .sources-section {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            border-top: 1px dashed var(--border);
-            padding-top: 8px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--slate-200);
         }
 
         .sources-title {
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--slate-500);
+            margin-bottom: 7px;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
         }
 
         .source-badge {
             display: inline-block;
             background: #eff6ff;
             border: 1px solid #bfdbfe;
-            color: var(--primary);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            color: #1e3a8a;
+            padding: 4px 9px;
+            border-radius: 5px;
+            font-size: 0.76rem;
             margin-right: 6px;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
+            transition: background 0.15s ease;
         }
 
         .source-badge:hover {
             background: #dbeafe;
         }
 
-        /* Verbatim text modal/drawer */
         .source-snippet {
-            background: #f8fafc;
-            border-left: 3px solid var(--accent);
-            padding: 8px 10px;
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-left: 3px solid var(--brand-blue);
+            padding: 9px 12px;
             margin-top: 6px;
             font-size: 0.8rem;
-            color: var(--text-muted);
-            border-radius: 0 4px 4px 0;
+            color: var(--slate-600);
+            border-radius: 4px;
             display: none;
         }
 
@@ -224,11 +336,11 @@
             display: block;
         }
 
-        /* Input Area */
+        /* Bottom Input Bar */
         .input-area {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border);
-            padding: 12px 16px;
+            background: #ffffff;
+            border-top: 1px solid var(--slate-200);
+            padding: 12px 18px;
             display: flex;
             gap: 10px;
             align-items: center;
@@ -236,56 +348,64 @@
 
         #question-input {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            font-size: 0.95rem;
+            padding: 11px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.93rem;
             outline: none;
-            transition: border-color 0.2s;
+            background: var(--slate-50);
+            transition: border-color 0.15s ease, background 0.15s ease;
         }
 
         #question-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+            border-color: var(--brand-blue);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
         }
 
         #send-btn {
-            background-color: var(--accent);
-            color: white;
+            background-color: var(--brand-blue);
+            color: #ffffff;
             border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
+            height: 42px;
+            padding: 0 18px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 6px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.15s ease;
             flex-shrink: 0;
         }
 
         #send-btn:hover {
-            background-color: var(--primary);
+            background-color: var(--brand-blue-hover);
+        }
+
+        #send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         #send-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
         }
 
         /* Loading Indicator */
         .typing-indicator {
             display: inline-flex;
-            gap: 4px;
-            padding: 4px 8px;
+            gap: 5px;
             align-items: center;
         }
 
         .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--text-muted);
+            width: 7px;
+            height: 7px;
+            background: var(--slate-500);
             border-radius: 50%;
             animation: bounce 1.4s infinite ease-in-out both;
         }
@@ -297,57 +417,103 @@
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1.0); }
         }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 12px 14px;
+            }
+            h1 {
+                font-size: 1rem;
+            }
+            .status-pill {
+                display: none;
+            }
+            .message {
+                max-width: 96%;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="app-shell">
+        <header>
+            <div class="brand-group">
+                <div class="brand-title-row">
+                    <span class="brand-icon">AI COPILOT</span>
+                    <h1>Manufacturing AI Copilot</h1>
+                </div>
+                <div class="subtitle">Kaveri Precision Components • Hosur Plant • SOP &amp; Maintenance Intelligence</div>
+            </div>
+            <div class="header-controls">
+                <span class="status-pill" title="Grounded in active plant SOPs and maintenance manuals">
+                    <span class="status-dot"></span>
+                    SOP Grounded
+                </span>
+                <button class="clear-btn" onclick="resetChat()" title="Clear conversation">Clear Chat</button>
+            </div>
+        </header>
 
-    <header>
-        <div class="header-top">
-            <h1>Manufacturing AI Copilot</h1>
-            <span class="plant-badge">Hosur Plant</span>
-        </div>
-        <div class="subtitle">Kaveri Precision Components • SOPs & Maintenance Q&A</div>
-    </header>
-
-    <!-- One-Tap Quick Query Chips (Optimized for glove/oily hand use) -->
-    <div class="quick-chips-container">
-        <button class="chip" onclick="askPreset('What is the recommended coolant concentration for the TX-200 CNC turning centre?')">💧 TX-200 Coolant</button>
-        <button class="chip" onclick="askPreset('The machine is showing alarm AL-104. What does it mean and what should the operator do?')">⚠️ Alarm AL-104</button>
-        <button class="chip" onclick="askPreset('Who is allowed to remove a lockout lock from a machine?')">🔒 LOTO Lock Removal</button>
-        <button class="chip" onclick="askPreset('What is the outer diameter tolerance for the BH-220 bearing housing?')">📏 BH-220 Tolerance</button>
-        <button class="chip" onclick="askPreset('How often should spindle runout be checked, and who does it?')">⚙️ Spindle Runout</button>
-        <button class="chip" onclick="askPreset('What are the sampling rules for incoming inspection under Rev 04?')">📋 Rev 04 Sampling</button>
-    </div>
-
-    <!-- Chat Message Area -->
-    <div id="chat-container">
-        <div class="message assistant">
-            <div class="message-bubble">
-                <p><strong>Welcome, Supervisor!</strong> I am your Manufacturing AI Copilot. I am grounded in your official plant manuals, maintenance guides, and LOTO procedures.</p>
-                <p>Tap a quick query chip above or type your question below to get instant answers with source citations.</p>
+        <!-- One-Tap Quick Query Chips -->
+        <div class="quick-bar-wrapper">
+            <div class="quick-bar-label">Quick Shop-Floor Queries</div>
+            <div class="quick-chips-container">
+                <button class="chip" onclick="askPreset('What is the recommended coolant concentration for the TX-200 CNC turning centre?')">TX-200 Coolant</button>
+                <button class="chip" onclick="askPreset('The machine is showing alarm AL-104. What does it mean and what should the operator do?')">Alarm AL-104</button>
+                <button class="chip" onclick="askPreset('Who is allowed to remove a lockout lock from a machine?')">LOTO Lock Removal</button>
+                <button class="chip" onclick="askPreset('What is the outer diameter tolerance for the BH-220 bearing housing?')">BH-220 Tolerance</button>
+                <button class="chip" onclick="askPreset('How often should spindle runout be checked, and who does it?')">Spindle Runout</button>
+                <button class="chip" onclick="askPreset('We received a lot of 300 pieces of bought-out components. How many random samples should the QC Inspector draw, and which form should be used to record the inspection?')">Rev 04 Sampling</button>
             </div>
         </div>
-    </div>
 
-    <!-- Input Area -->
-    <div class="input-area">
-        <input type="text" id="question-input" placeholder="Ask about alarms, LOTO, tolerances, or SOPs..." autocomplete="off">
-        <button id="send-btn" onclick="submitQuestion()" title="Send Question">
-            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-        </button>
+        <!-- Chat Message Area -->
+        <div id="chat-container"></div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <input type="text" id="question-input" placeholder="Ask about CNC alarms, LOTO safety, part tolerances, or active SOPs..." autocomplete="off">
+            <button id="send-btn" onclick="submitQuestion()" title="Ask Copilot">
+                <span>Ask</span>
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
     </div>
 
     <script>
         const chatContainer = document.getElementById('chat-container');
         const questionInput = document.getElementById('question-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        function renderWelcomeMessage() {
+            chatContainer.innerHTML = `
+                <div class="message assistant">
+                    <div class="message-meta">Manufacturing AI Copilot</div>
+                    <div class="message-bubble">
+                        <div class="answer-content">
+                            <p><strong>Welcome, Supervisor.</strong> I am grounded in your official plant manuals, quality inspection SOPs, and Lockout/Tagout safety procedures (with automated revision supersession checks).</p>
+                            <p>Select a quick query above or ask a question below to receive a cited operational response.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetChat() {
+            renderWelcomeMessage();
+            questionInput.value = '';
+            questionInput.focus();
+        }
+
+        renderWelcomeMessage();
 
         questionInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !sendBtn.disabled) {
                 submitQuestion();
             }
         });
 
         function askPreset(questionText) {
+            if (sendBtn.disabled) return;
             questionInput.value = questionText;
             submitQuestion();
         }
@@ -356,11 +522,10 @@
             const question = questionInput.value.trim();
             if (!question) return;
 
-            // Append User Message
             appendMessage(question, 'user');
             questionInput.value = '';
+            sendBtn.disabled = true;
 
-            // Show Loading Indicator
             const loadingId = appendLoading();
 
             try {
@@ -371,7 +536,8 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error('Server error occurred.');
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.detail || `Server responded with status ${response.status}`);
                 }
 
                 const data = await response.json();
@@ -380,14 +546,21 @@
 
             } catch (error) {
                 removeLoading(loadingId);
-                appendMessage('Error: Could not connect to the Copilot backend server. Please ensure FastAPI is running.', 'assistant');
+                appendMessage(`Request failed: ${error.message}. Please verify the backend service is running and try again.`, 'assistant');
+            } finally {
+                sendBtn.disabled = false;
+                questionInput.focus();
             }
         }
 
         function appendMessage(text, sender) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${sender}`;
-            msgDiv.innerHTML = `<div class="message-bubble">${escapeHtml(text)}</div>`;
+            const label = sender === 'user' ? 'Supervisor' : 'Manufacturing AI Copilot';
+            msgDiv.innerHTML = `
+                <div class="message-meta">${label}</div>
+                <div class="message-bubble">${escapeHtml(text)}</div>
+            `;
             chatContainer.appendChild(msgDiv);
             scrollToBottom();
         }
@@ -398,12 +571,13 @@
             msgDiv.className = 'message assistant';
             msgDiv.id = id;
             msgDiv.innerHTML = `
+                <div class="message-meta">Manufacturing AI Copilot</div>
                 <div class="message-bubble">
                     <div class="typing-indicator">
                         <div class="typing-dot"></div>
                         <div class="typing-dot"></div>
                         <div class="typing-dot"></div>
-                        <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 6px;">Searching plant manuals...</span>
+                        <span style="font-size: 0.84rem; color: #64748b; margin-left: 6px;">Retrieving plant SOPs and verifying citations...</span>
                     </div>
                 </div>
             `;
@@ -424,16 +598,16 @@
             let sourcesHtml = '';
             if (data.sources && data.sources.length > 0) {
                 sourcesHtml = `<div class="sources-section">
-                    <div class="sources-title">Verified Source Documents (Tap to inspect text):</div>`;
-                
+                    <div class="sources-title">Verified Source Documents (Click to Inspect Excerpt)</div>`;
+
                 data.sources.forEach((src, idx) => {
                     const snippetId = `snippet-${Date.now()}-${idx}`;
                     sourcesHtml += `
                         <span class="source-badge" onclick="toggleSnippet('${snippetId}')">
-                            📄 ${src.doc_id} (${src.revision}) - Pg ${src.page_number}
+                            ${escapeHtml(src.doc_id)} (${escapeHtml(src.revision)}) • Pg ${escapeHtml(String(src.page_number))}
                         </span>
                         <div id="${snippetId}" class="source-snippet">
-                            <strong>${src.title}</strong> [${src.status}]<br>
+                            <strong>${escapeHtml(src.title)}</strong> [${escapeHtml(src.status)}]<br>
                             <em>"${escapeHtml(src.raw_text)}"</em>
                         </div>
                     `;
@@ -441,12 +615,12 @@
                 sourcesHtml += `</div>`;
             }
 
-            // Convert simple newlines/bullet points to HTML formatting
-            let formattedAnswer = formatAnswerText(data.answer);
+            const formattedAnswer = formatAnswerText(data.answer);
 
             msgDiv.innerHTML = `
+                <div class="message-meta">Manufacturing AI Copilot</div>
                 <div class="message-bubble">
-                    ${formattedAnswer}
+                    <div class="answer-content">${formattedAnswer}</div>
                     ${sourcesHtml}
                 </div>
             `;
@@ -462,13 +636,69 @@
         }
 
         function formatAnswerText(text) {
-            // Simple helper to format bolding and bullet points nicely
-            let escaped = escapeHtml(text);
-            // Replace markdown bold **text**
-            escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Replace newlines with <br>
-            escaped = escaped.replace(/\n/g, '<br>');
-            return escaped;
+            const lines = text.split('\n');
+            let html = '';
+            let inList = false;
+
+            const applyInlineFormat = (str) => {
+                let s = escapeHtml(str);
+                s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                s = s.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;padding:1px 4px;border-radius:3px;font-size:0.86em;">$1</code>');
+                return s;
+            };
+
+            for (let rawLine of lines) {
+                const line = rawLine.trim();
+
+                if (!line) {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    continue;
+                }
+
+                if (line === '---' || line === '***') {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    html += '<hr>';
+                    continue;
+                }
+
+                if (line.startsWith('### ') || line.startsWith('## ')) {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    const headingText = line.replace(/^#{2,3}\s+/, '');
+                    html += `<h4>${applyInlineFormat(headingText)}</h4>`;
+                    continue;
+                }
+
+                if (/^([-*•]|\d+\.)\s+/.test(line)) {
+                    if (!inList) {
+                        html += '<ul>';
+                        inList = true;
+                    }
+                    const itemText = line.replace(/^([-*•]|\d+\.)\s+/, '');
+                    html += `<li>${applyInlineFormat(itemText)}</li>`;
+                    continue;
+                }
+
+                if (inList) {
+                    html += '</ul>';
+                    inList = false;
+                }
+                html += `<p>${applyInlineFormat(line)}</p>`;
+            }
+
+            if (inList) {
+                html += '</ul>';
+            }
+
+            return html;
         }
 
         function escapeHtml(text) {
@@ -479,7 +709,7 @@
                 '"': '&quot;',
                 "'": '&#039;'
             };
-            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+            return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
         }
 
         function scrollToBottom() {
